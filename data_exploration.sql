@@ -58,7 +58,6 @@ GROUP BY date
 ORDER BY date;
 --The first reported death in the data set was on 2020-01-23. There were a total of 665 reported cases on that day.
 
-
 SELECT date,SUM(new_cases) AS total_cases, SUM(new_deaths) AS total_deaths, (SUM(new_deaths)/SUM(new_cases))*100 AS death_percent
 FROM coviddeaths
 WHERE continent IS NOT NULL
@@ -66,11 +65,11 @@ GROUP BY date
 ORDER BY date;
 
 --total population vs vaccinations
-SELECT  dea.location, dea.date, dea.continent, population, new_vaccinations,
+SELECT  cd.location, cd.date, cd.continent, population, new_vaccinations,
 SUM(new_vaccinations) OVER (PARTITION BY dea.location ORDER BY dea.date) AS rolling_total
-FROM coviddeaths dea
-JOIN covidvaccinations vac 
-ON dea.location=vac.location and dea.date=vac.date
-WHERE dea.continent IS NOT NULL
-GROUP BY dea.location, dea.date, dea.continent, population, new_vaccinations
+FROM coviddeaths cd
+JOIN covidvaccinations cv 
+ON cd.location=cv.location and cd.date=cv.date
+WHERE cd.continent IS NOT NULL
+GROUP BY cd.location, cd.date, cd.continent, population, new_vaccinations
 ORDER BY 1,2;
