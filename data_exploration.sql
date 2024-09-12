@@ -1,5 +1,7 @@
-
-
+SELECT @@VERSION AS 'SQL Server Version Details'
+/*Microsoft SQL Server 2022 (RTM-GDR) (KB5042211) - 16.0.1125.1 (X64) Jul 31 2024 23:58:42   Copyright (C) 2022 Microsoft Corporation  Express Edition (64-bit)
+This query returned the version details for this SQL server instance. 
+*/
 SELECT TOP 1000 location,date, total_cases, total_deaths,population
 FROM coviddeaths
 WHERE continent IS NOT NULL;
